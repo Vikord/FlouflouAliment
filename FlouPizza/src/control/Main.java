@@ -4,6 +4,11 @@
  */
 package control;
 
+import io.Archive;
+import modele.CategorieEmploye;
+import util.Utilitaire;
+
+import java.util.HashMap;
 import ui.FenSaisie;
 
 public class Main {
@@ -15,6 +20,15 @@ public class Main {
         });
     }
 
+    //Lecture
+    String representants = Archive.lecture("D:\\Gaëlle\\FormationAnalysteProgrammeur\\Etape2_A07_ProgrammationComposants\\projet_session\\FlouflouAliments\\FlouPizza\\src\\files\\representants.json");
+        System.out.println(representants);
+
+
+    //Ecriture
+    //Archive.ecriture("../files/depensesRepresentants.txt");
+
+    }
 //    HashMap<String, CategorieEmploye> categories = new HashMap<>();
 //
 //    CategorieEmploye catJunior = new CategorieEmploye("junior", 25, 1200, 50, 0);
