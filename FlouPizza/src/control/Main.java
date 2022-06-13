@@ -4,7 +4,9 @@
  */
 package control;
 
+import io.Archive;
 import modele.CategorieEmploye;
+import util.Utilitaire;
 
 import java.util.HashMap;
 
@@ -23,6 +25,14 @@ public class Main {
     categories.put("junior", catJunior);
     categories.put("senior", catSenior);
     categories.put("super", catSuper);
+
+    //Lecture
+    String representants = Archive.lecture("D:\\Gaëlle\\FormationAnalysteProgrammeur\\Etape2_A07_ProgrammationComposants\\projet_session\\FlouflouAliments\\FlouPizza\\src\\files\\representants.json");
+        System.out.println(representants);
+
+
+    //Ecriture
+    //Archive.ecriture("../files/depensesRepresentants.txt");
 
     }
 }
