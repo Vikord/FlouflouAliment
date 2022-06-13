@@ -1,6 +1,9 @@
 
 package io;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 
 import java.io.*;
 
@@ -30,5 +33,8 @@ public class Archive {
 
         return sortie.toString();
     }
+    JSONParser jsonP = new JSONParser();
+//    JSONObject jsonO = (JSONObject) jsonP.parse(new FileReader("C:/person.json"));
+
     
 }
