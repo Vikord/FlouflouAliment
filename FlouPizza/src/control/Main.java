@@ -21,8 +21,8 @@ public class Main {
     }
 
     //Lecture
-    String representants = Archive.lecture("D:\\Gaëlle\\FormationAnalysteProgrammeur\\Etape2_A07_ProgrammationComposants\\projet_session\\FlouflouAliments\\FlouPizza\\src\\files\\representants.json");
-        System.out.println(representants);
+//    String representants = Archive.lecture("D:\\Gaëlle\\FormationAnalysteProgrammeur\\Etape2_A07_ProgrammationComposants\\projet_session\\FlouflouAliments\\FlouPizza\\src\\files\\representants.json");
+//        System.out.println(representants);
 
 
     //Ecriture
@@ -40,4 +40,4 @@ public class Main {
 //    categories.put("super", catSuper);
 //
 //    }
-}
+//}
