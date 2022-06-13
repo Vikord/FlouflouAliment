@@ -3,38 +3,12 @@ package modele;
 
 
 public class Representant extends Employe {
-    private String categorie;
-    private String Secteur;
+
+    private String secteur;
         
-public Representant() {
+public Representant(int empId, String nom, String prenom, String adresse, String courriel, String categorieRepresentant, String secteur, CategorieEmploye categorieEmploye) {
+    super(empId, nom, prenom, adresse, courriel, categorieEmploye);
+    this.secteur = secteur;
     }
 
-    public Representant(String categorie, String Secteur) {
-        this.categorie = categorie;
-        this.Secteur = Secteur;
-    }
-
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
-    public String getSecteur() {
-        return Secteur;
-    }
-
-    public void setSecteur(String Secteur) {
-        this.Secteur = Secteur;
-    }
-
-    @Override
-    public String toString() {
-        return "Representant{" + "categorie=" + categorie + ", Secteur=" + Secteur + '}';
-    }
-
-    
-    
 }

@@ -8,16 +8,18 @@ public class Employe {
     private String prenom;
     private String adresse;
     private String courriel;
+    private CategorieEmploye categorieEmploye;
 
     public Employe() {
     }
 
-    public Employe(int empId, String nom, String prenom, String adresse, String courriel) {
+    public Employe(int empId, String nom, String prenom, String adresse, String courriel, CategorieEmploye categorieEmploye) {
         this.empId = empId;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.courriel = courriel;
+        this.categorieEmploye = categorieEmploye;
     }
 
     public int getEmpId() {
@@ -60,16 +62,13 @@ public class Employe {
         this.courriel = courriel;
     }
 
-    @Override
-    public String toString() {
-        return "Employes{" + "empId=" 
-                + empId + ", nom=" 
-                + nom + ", prenom=" 
-                + prenom + ", adresse=" 
-                + adresse + ", courriel=" 
-                + courriel + '}';
+    public CategorieEmploye getCategorieEmploye() {
+        return categorieEmploye;
     }
-    
-    
-    
+
+    public void setCategorieEmploye(CategorieEmploye categorieEmploye) {
+        this.categorieEmploye = categorieEmploye;
+    }
+
+
 }

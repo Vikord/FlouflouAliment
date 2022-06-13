@@ -1,21 +1,21 @@
 package util;
 
-import modele.Depense;
+import modele.Frais;
 
 public class DepenseDejaPresenteException extends Exception {
 
-    private Depense depense;
+    private Frais depense;
 
-    public DepenseDejaPresenteException(String message, Depense depense) {
+    public DepenseDejaPresenteException(String message, Frais depense) {
         super(message);
         this.depense = depense;
     }
 
-    public Depense getDepense() {
+    public Frais getDepense() {
         return depense;
     }
 
-    public void setDepense(Depense depense) {
+    public void setDepense(Frais depense) {
         this.depense = depense;
     }
 
