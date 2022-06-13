@@ -2,6 +2,7 @@
 package modele;
 
 
-public class Repas extends Depense{
+public class Repas extends Depense {
+
         
 }

@@ -2,7 +2,7 @@
 package modele;
 
 
-public class Representant extends Employe{
+public class Representant extends Employe {
     private String categorie;
     private String Secteur;
         

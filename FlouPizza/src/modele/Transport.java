@@ -1,11 +1,12 @@
 
 package modele;
 
-public class Transport extends Depense{
-    
+public class Transport extends Depense {
+
     private String type;
 
     public Transport() {
+
     }
     
     public Transport(String type) {

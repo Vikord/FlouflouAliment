@@ -4,17 +4,13 @@
  */
 package control;
 
-/**
- *
- * @author Admin
- */
-public class Main {
+import modele.Depense;
+import modele.Repas;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Main {
     public static void main(String[] args) {
-        // TODO code application logic here
+
+
     }
     
 }

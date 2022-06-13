@@ -1,7 +1,6 @@
 
 package modele;
 
-
 public class Employe {
     
     private int empId;
