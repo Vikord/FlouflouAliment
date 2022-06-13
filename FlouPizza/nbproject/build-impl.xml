@@ -1114,7 +1114,7 @@ is divided into following sections:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target depends="init,deps-jar,-pre-pre-compile" name="-do-compile-single">
-        <fail unless="javac.includes">Must select some files in the IDE or set javac.includes</fail>
+        <fail unless="javac.includes">Must select some data in the IDE or set javac.includes</fail>
         <j2seproject3:force-recompile/>
         <j2seproject3:javac excludes="" gensrcdir="${build.generated.sources.dir}" includes="${javac.includes}, module-info.java" sourcepath="${src.dir}"/>
     </target>
@@ -1466,7 +1466,7 @@ is divided into following sections:
     </target>
     <target depends="-profile-test-single-pre72" description="Profile a selected test in the IDE." name="profile-test-single"/>
     <target depends="-profile-check" description="Profile a selected test in the IDE." if="profiler.configured" name="profile-test" unless="profiler.info.jvmargs">
-        <fail unless="test.includes">Must select some files in the IDE or set test.includes</fail>
+        <fail unless="test.includes">Must select some data in the IDE or set test.includes</fail>
         <startprofiler/>
         <antcall target="test-single"/>
     </target>
@@ -1520,10 +1520,10 @@ is divided into following sections:
         </javadoc>
         <copy todir="${dist.javadoc.dir}">
             <fileset dir="${src.dir}" excludes="${excludes}" includes="${includes}">
-                <filename name="**/doc-files/**"/>
+                <filename name="**/doc-data/**"/>
             </fileset>
             <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
-                <include name="**/doc-files/**"/>
+                <include name="**/doc-data/**"/>
             </fileset>
         </copy>
     </target>
@@ -1614,7 +1614,7 @@ is divided into following sections:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target depends="init,deps-jar,compile,-init-test-module-properties,-pre-pre-compile-test,-pre-compile-test-single" if="have.tests" name="-do-compile-test-single">
-        <fail unless="javac.includes">Must select some files in the IDE or set javac.includes</fail>
+        <fail unless="javac.includes">Must select some data in the IDE or set javac.includes</fail>
         <j2seproject3:force-recompile destdir="${build.test.classes.dir}"/>
         <j2seproject3:javac apgeneratedsrcdir="${build.test.classes.dir}" classpath="${javac.test.classpath}" debug="true" destdir="${build.test.classes.dir}" excludes="" includes="${javac.includes}, module-info.java" modulepath="${javac.test.modulepath}" processorpath="${javac.test.processorpath}" sourcepath="${test.src.dir}" srcdir="${test.src.dir}">
             <customize>
@@ -1651,7 +1651,7 @@ is divided into following sections:
         <mkdir dir="${build.test.results.dir}"/>
     </target>
     <target depends="init,compile-test-single,-init-test-run-module-properties,-pre-test-run-single" if="have.tests" name="-do-test-run-single">
-        <fail unless="test.includes">Must select some files in the IDE or set test.includes</fail>
+        <fail unless="test.includes">Must select some data in the IDE or set test.includes</fail>
         <j2seproject3:test excludes="" includes="${test.includes}" testincludes="${test.includes}"/>
     </target>
     <target depends="init,compile-test-single,-pre-test-run-single,-do-test-run-single" if="have.tests" name="-post-test-run-single">
@@ -1659,7 +1659,7 @@ is divided into following sections:
     </target>
     <target depends="init,compile-test-single,-init-test-run-module-properties,-pre-test-run-single,-do-test-run-single,-post-test-run-single" description="Run single unit test." name="test-single"/>
     <target depends="init,compile-test-single,-pre-test-run-single" if="have.tests" name="-do-test-run-single-method">
-        <fail unless="test.class">Must select some files in the IDE or set test.class</fail>
+        <fail unless="test.class">Must select some data in the IDE or set test.class</fail>
         <fail unless="test.method">Must select some method in the IDE or set test.method</fail>
         <j2seproject3:test excludes="" includes="${javac.includes}" testincludes="${test.class}" testmethods="${test.method}"/>
     </target>
