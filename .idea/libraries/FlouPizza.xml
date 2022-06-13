@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="FlouPizza">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/FlouPizza/dist/FlouPizza.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

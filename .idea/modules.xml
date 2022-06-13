@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlouPizza/FlouPizza.iml" filepath="$PROJECT_DIR$/FlouPizza/FlouPizza.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/FlouflouAliments.iml" filepath="$PROJECT_DIR$/.idea/FlouflouAliments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlouPizza/projet_jtable/projet_jtable.iml" filepath="$PROJECT_DIR$/FlouPizza/projet_jtable/projet_jtable.iml" />
+    </modules>
+  </component>
+</project>
