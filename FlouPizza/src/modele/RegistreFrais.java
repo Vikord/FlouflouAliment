@@ -27,7 +27,7 @@ public class RegistreFrais {
         } else {
             this.registreDepense.add(depense);
             //DISTINGUER REPAS HEBERGEMENT DEPLACEMENT??? IF FRAIS = FRAISREPAS
-            System.out.println("ajouté dans la liste");
+            //System.out.println("ajouté dans la liste");
         }
     }
 
@@ -47,9 +47,9 @@ public class RegistreFrais {
     public void listerDepenses(RegistreFrais registreDepenses) {
         for (Frais tmp: registreDepense) {
             System.out.println(tmp);
-            //à définir plus précisément (juste no employé, nom et prénom)
+            //à définir plus précisément
+            // Employe employe (Id, nom, prenom, catégorie de l'employé), String categorieFrais, double montantFrais, String dateFrais, double montantRemboursementFrais)
         }
     }
-
 }
             

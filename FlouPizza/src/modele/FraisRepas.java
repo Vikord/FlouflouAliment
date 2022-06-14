@@ -14,7 +14,7 @@ public class FraisRepas extends Frais {
     }
 
     @Override
-    public double retournerRemboursementDisponible() {
-        return super.retournerRemboursementDisponible();
+    public double retournerAllocation() {
+        return 0;
     }
 }

@@ -65,16 +65,12 @@ public abstract class Frais {
 
     public double calculerRemboursementFrais() {
         double montantFrais = retournerMontantFrais();
-        double remboursementDisponible = retournerRemboursementDisponible();
+        double allocation = retournerAllocation();
 
-        if (montantFrais > remboursementDisponible)
-            return remboursementDisponible;
+        if (montantFrais > allocation)
+            return allocation;
         else {
-            double montantRemboursement = montantFrais - remboursementDisponible;
-            if (montantRemboursement > 0)
-                return montantRemboursement;
-            else
-                return 0;
+            return montantFrais;
         }
     }
 
@@ -82,7 +78,7 @@ public abstract class Frais {
         return 0;
     }
 
-    public double retournerRemboursementDisponible() {
+    public double retournerAllocation() {
         return 0;
     }
 
