@@ -3,7 +3,7 @@ package modele;
 
 public class Employe {
     
-    private int empId;
+    private String empId;
     private String nom;
     private String prenom;
     private String adresse;
@@ -13,7 +13,7 @@ public class Employe {
     public Employe() {
     }
 
-    public Employe(int empId, String nom, String prenom, String adresse, String courriel, CategorieEmploye categorieEmploye) {
+    public Employe(String empId, String nom, String prenom, String adresse, String courriel, CategorieEmploye categorieEmploye) {
         this.empId = empId;
         this.nom = nom;
         this.prenom = prenom;
@@ -22,11 +22,18 @@ public class Employe {
         this.categorieEmploye = categorieEmploye;
     }
 
-    public int getEmpId() {
+    public Employe(String empId, String nom, String prenom, CategorieEmploye categorieEmploye) {
+        this.empId = empId;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.categorieEmploye = categorieEmploye;
+    }
+
+    public String getEmpId() {
         return empId;
     }
 
-    public void setEmpId(int empId) {
+    public void setEmpId(String empId) {
         this.empId = empId;
     }
 
@@ -69,6 +76,4 @@ public class Employe {
     public void setCategorieEmploye(CategorieEmploye categorieEmploye) {
         this.categorieEmploye = categorieEmploye;
     }
-
-
 }
