@@ -1,56 +1,45 @@
 
 package io;
 
+import modele.CategorieEmploye;
+import modele.Employe;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Archive {
- //   public static String lecture(String fichier) throws FileNotFoundException {
-//        try {
-//            Object ob = new JSONParser().parse(new FileReader("src/data/representants.json"));
-//
-//            JSONObject test = (JSONObject) ob;
-//
-//            String categorie = test.representant.get("Categorie");
-//        } catch (IOException | ParseException e) {
-//            e.getMessage();
-//        }
+    public static ArrayList<Employe> lecture(String fichier, HashMap<String, CategorieEmploye> categories) throws FileNotFoundException, IOException, ParseException {
 
-//        File file = new File(fichier);
-//
-//        FileReader fr = null;
-//        BufferedReader br = null;
-//        StringBuilder sortie = new StringBuilder();//sortie de lecture
-//        try {
-//            fr = new FileReader(file);
-//            br = new BufferedReader(fr);
-//            //lecture
-//
-//            String c;
-//            while ((c = br.readLine()) != null) {
-//                sortie.append(c);
-//                sortie.append("\n");
-//            }
-//            br.close();
-//        } catch (FileNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (IOException e2) {
-//            e2.printStackTrace();
-//        }
-//
-//        return sortie.toString();
- //   }
-//    JSONParser jsonP = new JSONParser();
-//    JSONObject jsonO = (JSONObject) jsonP.parse(new FileReader("C:/person.json"));
+        Object objet = new JSONParser().parse(new FileReader(fichier));
+        JSONObject jso = (JSONObject) objet;
+        org.json.simple.JSONArray representants = (JSONArray) jso.get("representants");
 
-    public static class ecriture {
+        ArrayList<Employe> listeRepresentants = new ArrayList<Employe>();
 
-        public ecriture() {
+        for (int i = 0; i < representants.size(); i++) {
+            Object objetjs = representants.get(i);
+            String empId = (String) ((JSONObject) objetjs).get("EmpId");
+            String nom = (String) ((JSONObject) objetjs).get("Nom");
+            String prenom = (String) ((JSONObject) objetjs).get("Prenom");
+            String cleCategorie = (String) ((JSONObject) objetjs).get("Categorie");
+
+            listeRepresentants.add(new Employe(empId, nom, prenom, categories.get(cleCategorie)));
         }
+
+        return listeRepresentants;
     }
+
+
+
+//    public static class ecriture {
+//
+//        public ecriture() {
+//        }
+
 
 
 }
