@@ -46,5 +46,11 @@ public class Archive {
 //    JSONParser jsonP = new JSONParser();
 //    JSONObject jsonO = (JSONObject) jsonP.parse(new FileReader("C:/person.json"));
 
-    
+    public static class ecriture {
+
+        public ecriture() {
+        }
+    }
+
+
 }

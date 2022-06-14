@@ -2,6 +2,7 @@
   <library name="FlouPizza">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/FlouPizza/dist/FlouPizza.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-simple-1.1.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
