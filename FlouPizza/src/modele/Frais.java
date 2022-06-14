@@ -63,9 +63,8 @@ public abstract class Frais {
         this.montantRemboursementFrais = montantRemboursementFrais;
     }
 
-    public double calculerRemboursementFrais() {
-        double montantFrais = retournerMontantFrais();
-        double allocation = retournerAllocation();
+    public double calculerRemboursementFrais(Employe employe, double montantFrais) {
+        double allocation = retournerAllocation(employe);
 
         if (montantFrais > allocation)
             return allocation;
@@ -74,20 +73,19 @@ public abstract class Frais {
         }
     }
 
-    public double retournerMontantFrais() {
+    public double retournerAllocation(Employe employe) {
         return 0;
     }
-
-    public double retournerAllocation() {
-        return 0;
-    }
-
-
 
     @Override
     public String toString() {
-        return "Depense{" + "categorie=" + categorieFrais
-                + ", frais=" + montantFrais + '}';
+        return "Frais{" +
+                "employe=" + employe +
+                ", categorieFrais='" + categorieFrais + '\'' +
+                ", montantFrais=" + montantFrais +
+                ", dateFrais='" + dateFrais + '\'' +
+                ", montantRemboursementFrais=" + montantRemboursementFrais +
+                '}';
     }
 
     @Override

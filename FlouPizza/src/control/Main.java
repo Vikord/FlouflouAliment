@@ -5,12 +5,13 @@
 package control;
 
 import io.Archive;
-import modele.CategorieEmploye;
+import modele.*;
 import org.json.simple.parser.*;
 import ui.FenSaisie;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -32,8 +33,10 @@ public class Main {
         categories.put("senior", catSenior);
         categories.put("super", catSuper);
 
+        ListeRepresentants listeRepresentants = new ListeRepresentants();
+
         try {
-            Archive.lecture("c:/temp/representants.json", categories); //gérer exceptions
+            listeRepresentants = Archive.lecture("c:/temp/representants.json", categories); //gérer exceptions
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         } catch (IOException e2) {
@@ -41,6 +44,23 @@ public class Main {
         } catch (ParseException e3) {
             e3.printStackTrace();
         }
+
+
+        String empId = "7";
+        double testMontant = 200;
+        String date = "2022-06-10";
+
+        Employe testEmploye = listeRepresentants.rechercherEmployeParId(empId);
+        System.out.println(testEmploye);
+
+        Frais testFrais = new FraisRepas();
+        double montantRemboursement = testFrais.calculerRemboursementFrais(testEmploye, testMontant);
+        System.out.println(montantRemboursement);
+
+        RegistreFrais testRegistreFrais = new RegistreFrais();
+        testRegistreFrais.ajouterFrais(new FraisRepas(testEmploye, "repas", testMontant, date, montantRemboursement));
+
+        testRegistreFrais.listerFrais();
 
 
 

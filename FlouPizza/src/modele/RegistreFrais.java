@@ -6,33 +6,33 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class RegistreFrais {
-    private ArrayList<Frais> registreDepense;
+    private ArrayList<Frais> registreFrais;
 
     public RegistreFrais() {
-        this.registreDepense = new ArrayList<Frais>();
+        this.registreFrais = new ArrayList<Frais>();
     }
 
-    public ArrayList<Frais> getRegistreDepense() {
-        return registreDepense;
+    public ArrayList<Frais> getRegistreFrais() {
+        return registreFrais;
     }
 
-    public void setRegistreDepense(ArrayList<Frais> registreDepense) {
-        this.registreDepense = registreDepense;
+    public void setRegistreFrais(ArrayList<Frais> registreFrais) {
+        this.registreFrais = registreFrais;
     }
 
-    public void ajouterDepense(Frais depense) {
-        if(validerDoublon(depense)) {
+    public void ajouterFrais(Frais frais) {
+        if(validerDoublon(frais)) {
             //throw new DepenseDejaPresenteException("Cette dépense a déjà été enregistrée", depense);
             JOptionPane.showMessageDialog(null, "Cette dépense a déjà été enregistrée", "Doublon", JOptionPane.ERROR_MESSAGE);
         } else {
-            this.registreDepense.add(depense);
-            //DISTINGUER REPAS HEBERGEMENT DEPLACEMENT??? IF FRAIS = FRAISREPAS
+            this.registreFrais.add(frais);
+
             //System.out.println("ajouté dans la liste");
         }
     }
 
     private boolean validerDoublon(Frais depense) {
-        for (Frais tmp: registreDepense) {
+        for (Frais tmp: registreFrais) {
             if(tmp.equals(depense)) {
                 return true;
             }
@@ -41,11 +41,11 @@ public class RegistreFrais {
     }
 
     public void supprimerDerniereDepenseEnregistree(Frais depense) {
-        registreDepense.remove((registreDepense.size()) - 1);
+        registreFrais.remove((registreFrais.size()) - 1);
     }
 
-    public void listerDepenses(RegistreFrais registreDepenses) {
-        for (Frais tmp: registreDepense) {
+    public void listerFrais() {
+        for (Frais tmp: this.registreFrais) {
             System.out.println(tmp);
             //à définir plus précisément
             // Employe employe (Id, nom, prenom, catégorie de l'employé), String categorieFrais, double montantFrais, String dateFrais, double montantRemboursementFrais)

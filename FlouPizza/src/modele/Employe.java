@@ -1,7 +1,7 @@
 
 package modele;
 
-public class Employe {
+public abstract class Employe {
     
     private String empId;
     private String nom;
@@ -19,13 +19,6 @@ public class Employe {
         this.prenom = prenom;
         this.adresse = adresse;
         this.courriel = courriel;
-        this.categorieEmploye = categorieEmploye;
-    }
-
-    public Employe(String empId, String nom, String prenom, CategorieEmploye categorieEmploye) {
-        this.empId = empId;
-        this.nom = nom;
-        this.prenom = prenom;
         this.categorieEmploye = categorieEmploye;
     }
 
@@ -75,5 +68,15 @@ public class Employe {
 
     public void setCategorieEmploye(CategorieEmploye categorieEmploye) {
         this.categorieEmploye = categorieEmploye;
+    }
+
+    @Override
+    public String toString() {
+        return "Employe{" +
+                "empId='" + empId + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", categorieEmploye=" + categorieEmploye +
+                '}';
     }
 }
