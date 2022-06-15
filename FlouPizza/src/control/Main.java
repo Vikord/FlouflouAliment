@@ -60,18 +60,10 @@ public class Main {
         RegistreFrais testRegistreFrais = new RegistreFrais();
         testRegistreFrais.ajouterFrais(new FraisRepas(testEmploye, "repas", testMontant, date, montantRemboursement));
 
-        testRegistreFrais.listerFrais();
-
-
-
-
 
 
         //Ecriture
-    //Archive.ecriture("../files/depensesRepresentants.txt");
-
- //   }
-
+        Archive.ecriture("c:/temp/listeFraisRepresentants.txt", testRegistreFrais);
 
     }
 }

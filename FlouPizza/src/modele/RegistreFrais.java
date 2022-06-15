@@ -3,6 +3,7 @@ package modele;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class RegistreFrais {
@@ -44,11 +45,35 @@ public class RegistreFrais {
         registreFrais.remove((registreFrais.size()) - 1);
     }
 
-    public void listerFrais() {
+    public String listerFraisPourFichier() {
+        StringBuilder sb = new StringBuilder();
         for (Frais tmp: this.registreFrais) {
-            System.out.println(tmp);
-            //à définir plus précisément
-            // Employe employe (Id, nom, prenom, catégorie de l'employé), String categorieFrais, double montantFrais, String dateFrais, double montantRemboursementFrais)
+            sb.append(tmp.getEmploye().getEmpId() + " - "
+            + tmp.getEmploye().getNom() + " "
+            + tmp.getEmploye().getPrenom() + ", "
+            + tmp.getEmploye().getCategorieEmploye().getNomCategorie() + ": "
+            + tmp.getDateFrais() + " "
+            + tmp.getCategorieFrais() + " "
+            + tmp.getMontantFrais() + "$ → "
+            + tmp.getMontantRemboursementFrais() + "$");
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public void listerFraisPourUI(JTable tblAffichage) {
+        DefaultTableModel model = (DefaultTableModel) tblAffichage.getModel();
+        model.setRowCount(0);
+
+        for (Frais tmp: this.registreFrais) {
+            model.addRow(new Object[] {tmp.getEmploye().getEmpId(),
+                                       tmp.getEmploye().getNom(),
+                                       tmp.getEmploye().getPrenom(),
+                                       tmp.getEmploye().getCategorieEmploye().getNomCategorie(),
+                                       tmp.getDateFrais(),
+                                       tmp.getCategorieFrais(),
+                                       tmp.getMontantFrais(),
+                                       tmp.getMontantRemboursementFrais()});
         }
     }
 }

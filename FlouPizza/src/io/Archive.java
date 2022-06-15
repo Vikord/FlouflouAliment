@@ -1,10 +1,7 @@
 
 package io;
 
-import modele.CategorieEmploye;
-import modele.Employe;
-import modele.ListeRepresentants;
-import modele.Representant;
+import modele.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -37,13 +34,22 @@ public class Archive {
         return listeRepresentants;
     }
 
+    public static void ecriture(String fichier, RegistreFrais registreFrais)
+    {
+        File file = new File(fichier);
+        FileWriter fw = null;
+        BufferedWriter bw = null;
 
+        String listeFraisRepresentants = registreFrais.listerFraisPourFichier();
 
-//    public static class ecriture {
-//
-//        public ecriture() {
-//        }
-
-
-
+        try {
+            fw = new FileWriter(file);
+            bw = new BufferedWriter(fw);
+            bw.write(listeFraisRepresentants);
+            bw.close();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
