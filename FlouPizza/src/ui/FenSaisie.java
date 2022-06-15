@@ -22,7 +22,6 @@ public class FenSaisie extends javax.swing.JFrame {
     /**
      * Creates new form FenResumeNew
      */
-
     private ListeRepresentants listeRepresentants = new ListeRepresentants();
     private HashMap<String, CategorieEmploye> categories = new HashMap<>();
 
@@ -117,10 +116,13 @@ public class FenSaisie extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Catégorie", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
+        btnG.add(rbtnRepas2);
         rbtnRepas2.setText("Repas");
 
+        btnG.add(rbtnHeber2);
         rbtnHeber2.setText("Hébergement");
 
+        btnG.add(rbtnTrans2);
         rbtnTrans2.setText("Transport");
         rbtnTrans2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +193,11 @@ public class FenSaisie extends javax.swing.JFrame {
         trans.setEditable(true);
         trans.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Auto", "Train", "Avion" }));
         trans.setEnabled(false);
+        trans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transActionPerformed(evt);
+            }
+        });
 
         try {
             txtDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
@@ -350,8 +357,7 @@ public class FenSaisie extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-     
+
     private void btnSupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupActionPerformed
         registreFrais.supprimerDerniereDepenseEnregistree();
         registreFrais.listerFraisPourUI(tblAffichage);
@@ -372,27 +378,30 @@ public class FenSaisie extends javax.swing.JFrame {
         double montantFrais = Double.parseDouble(txtMont.getText());
         Frais frais = new FraisRepas();
 
-        if(rbtnHeber2.isSelected())
+        if (rbtnHeber2.isSelected()) {
             frais = new FraisHebergement();
-        else if(rbtnTrans2.isSelected())
+        } else if (rbtnTrans2.isSelected()) {
             frais = new FraisDeplacement();
+        }
 
         boolean aerien = false;
-        if(trans.getSelectedItem().equals("avion"))
+        if (trans.getSelectedItem().equals("avion")) {
             aerien = true;
+        }
 
         double montantRemboursement = frais.calculerRemboursementFrais(employe, montantFrais, aerien);
 
-        if(rbtnRepas2.isSelected())
+        if (rbtnRepas2.isSelected()) {
             registreFrais.ajouterFrais(new FraisRepas(employe, "Repas", montantFrais, txtDate.getText(), montantRemboursement));
-        else if(rbtnHeber2.isSelected())
+        } else if (rbtnHeber2.isSelected()) {
             registreFrais.ajouterFrais(new FraisHebergement(employe, "Hébergement", montantFrais, txtDate.getText(), montantRemboursement));
-        else if(rbtnTrans2.isSelected()) {
+        } else if (rbtnTrans2.isSelected()) {
             String typeDeplacement;
-            if(aerien)
+            if (aerien) {
                 typeDeplacement = "avion";
-            else
+            } else {
                 typeDeplacement = "voiture ou train";
+            }
             registreFrais.ajouterFrais(new FraisDeplacement(employe, "Déplacement", montantFrais, txtDate.getText(), montantRemboursement, "voiture ou train"));
         }
 
@@ -420,9 +429,9 @@ public class FenSaisie extends javax.swing.JFrame {
 
     private void rbtnRepasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRepasActionPerformed
 
-btnG.add(rbtnRepas);
-btnG.add(rbtnHeb);
-btnG.add(rbtnTra);
+        btnG.add(rbtnRepas);
+        btnG.add(rbtnHeb);
+        btnG.add(rbtnTra);
 
 
     }//GEN-LAST:event_rbtnRepasActionPerformed
@@ -432,7 +441,7 @@ btnG.add(rbtnTra);
     }//GEN-LAST:event_rbtnHebActionPerformed
 
     private void rbtnTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTraActionPerformed
-  
+
     }//GEN-LAST:event_rbtnTraActionPerformed
 
     private void btnEnregistreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistreActionPerformed
@@ -443,12 +452,16 @@ btnG.add(rbtnTra);
     }//GEN-LAST:event_btnEnregistreActionPerformed
 
     private void rbtnTrans2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTrans2ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_rbtnTrans2ActionPerformed
 
     private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDateActionPerformed
+
+    private void transActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,7 +503,6 @@ btnG.add(rbtnTra);
                 new FenSaisie().setVisible(true);
             }
         });
-
 
     }
 
