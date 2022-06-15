@@ -103,4 +103,5 @@ public abstract class Frais {
     public int hashCode() {
         return Objects.hash(employe, categorieFrais, montantFrais, dateFrais);
     }
+
 }

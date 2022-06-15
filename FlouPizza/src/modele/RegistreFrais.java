@@ -41,7 +41,7 @@ public class RegistreFrais {
         return false;
     }
 
-    public void supprimerDerniereDepenseEnregistree(Frais depense) {
+    public void supprimerDerniereDepenseEnregistree() {
         registreFrais.remove((registreFrais.size()) - 1);
     }
 

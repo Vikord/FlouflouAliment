@@ -4,6 +4,16 @@
  */
 package ui;
 
+import io.Archive;
+import modele.*;
+import org.json.simple.parser.ParseException;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+
 /**
  * @author Admin
  */
@@ -12,10 +22,21 @@ public class FenSaisie extends javax.swing.JFrame {
     /**
      * Creates new form FenResumeNew
      */
+
+    private ListeRepresentants listeRepresentants = new ListeRepresentants();
+    private HashMap<String, CategorieEmploye> categories = new HashMap<>();
+
+    private RegistreFrais registreFrais = new RegistreFrais();
+
     public FenSaisie() {
         initComponents();
     }
 
+    public FenSaisie(ListeRepresentants listeRepresentants, HashMap<String, CategorieEmploye> categories) {
+        this();
+        this.listeRepresentants = listeRepresentants;
+        this.categories = categories;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,17 +74,17 @@ public class FenSaisie extends javax.swing.JFrame {
         rbtnTrans2 = new javax.swing.JRadioButton();
         javax.swing.JPanel jPan2 = new javax.swing.JPanel();
         lblDate = new javax.swing.JLabel();
-        txtDate = new javax.swing.JTextField();
         lblMont = new javax.swing.JLabel();
         txtMont = new javax.swing.JTextField();
         lblType = new javax.swing.JLabel();
         trans = new javax.swing.JComboBox<>();
+        txtDate = new javax.swing.JFormattedTextField();
         lblLimite = new javax.swing.JLabel();
         btnQui = new javax.swing.JButton();
         btnSup = new javax.swing.JButton();
         btnAjou = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAffichage = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnEnregistre = new javax.swing.JButton();
 
@@ -171,6 +192,19 @@ public class FenSaisie extends javax.swing.JFrame {
         trans.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Auto", "Train", "Avion" }));
         trans.setEnabled(false);
 
+        try {
+            txtDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDate.setText("    -    -  ");
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPan2Layout = new javax.swing.GroupLayout(jPan2);
         jPan2.setLayout(jPan2Layout);
         jPan2Layout.setHorizontalGroup(
@@ -179,16 +213,16 @@ public class FenSaisie extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(lblDate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(lblMont)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMont, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(lblType)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtMont, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblType)
+                .addGap(18, 18, 18)
                 .addComponent(trans, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
         jPan2Layout.setVerticalGroup(
             jPan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,11 +230,11 @@ public class FenSaisie extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMont)
                     .addComponent(txtMont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblType)
-                    .addComponent(trans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -227,29 +261,29 @@ public class FenSaisie extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAffichage.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nom", "Prénom", "Catégorie", "Type", "Montant", "Remboursement"
+                "ID", "Nom", "Prénom", "Catégorie", "Date", "Type de frais", "Montant", "Remboursement"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setEnabled(false);
-        jTable1.setFocusable(false);
-        jTable1.setRowSelectionAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        tblAffichage.setEnabled(false);
+        tblAffichage.setFocusable(false);
+        tblAffichage.setRowSelectionAllowed(false);
+        jScrollPane1.setViewportView(tblAffichage);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("ENREGISTREMENT DES FRAIS REMBOURSABLES");
@@ -277,7 +311,7 @@ public class FenSaisie extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(btnQui, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(153, 153, 153)
                 .addComponent(btnSup, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,18 +353,51 @@ public class FenSaisie extends javax.swing.JFrame {
     
      
     private void btnSupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupActionPerformed
-        // RegistreFrais.supprimerDerniereDepenseEnregistree();
+        registreFrais.supprimerDerniereDepenseEnregistree();
+        registreFrais.listerFraisPourUI(tblAffichage);
     }//GEN-LAST:event_btnSupActionPerformed
 
     private void btnAjouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouActionPerformed
-   double depense = Double.parseDouble(txtMont.getText());
-   String date = txtDate.getText();
-   String rep = txtRep.getText();
-        System.out.println(depense+" , "+date+" , "+rep);
-   txtMont.setText("");
-   txtDate.setText("");
-   txtRep.setText("");
+        try {
+            listeRepresentants = Archive.lecture("c:/temp/representants.json", categories);
+        } catch (FileNotFoundException e1) {
+            JOptionPane.showMessageDialog(null, "Problème de fichier en entrée", "Erreur de fichier", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e2) {
+            JOptionPane.showMessageDialog(null, "Problème de fichier en sortie", "Erreur de fichier", JOptionPane.ERROR_MESSAGE);
+        } catch (ParseException e3) {
+            JOptionPane.showMessageDialog(null, "Problème de conversion de fichier", "Erreur de fichier", JOptionPane.ERROR_MESSAGE);
+        }
+
+        Employe employe = listeRepresentants.rechercherEmployeParId(txtRep.getText());
+        double montantFrais = Double.parseDouble(txtMont.getText());
+        Frais frais = new FraisRepas();
+
+        if(rbtnHeber2.isSelected())
+            frais = new FraisHebergement();
+        else if(rbtnTrans2.isSelected())
+            frais = new FraisDeplacement();
+
+        double montantRemboursement = frais.calculerRemboursementFrais(employe, montantFrais);
+
+        if(rbtnRepas2.isSelected())
+            registreFrais.ajouterFrais(new FraisRepas(employe, "Repas", montantFrais, txtDate.getText(), montantRemboursement));
+        else if(rbtnHeber2.isSelected())
+            registreFrais.ajouterFrais(new FraisHebergement(employe, "Hébergement", montantFrais, txtDate.getText(), montantRemboursement));
+        //else if(rbtnTrans2.isSelected())
+            //registreFrais.ajouterFrais(new FraisDeplacement(employe, "Déplacement", montantFrais, txtDate.getText(), montantRemboursement));
+
+        registreFrais.listerFraisPourUI(tblAffichage);
+
     }//GEN-LAST:event_btnAjouActionPerformed
+
+    public void reset() {
+        txtRep.setText(null);
+        txtDate.setText(null);
+        txtMont.setText(null);
+        DefaultTableModel model = (DefaultTableModel) tblAffichage.getModel();
+        model.setRowCount(0);
+        registreFrais = new RegistreFrais();
+    }
 
     private void combTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combTypeActionPerformed
         // TODO add your handling code here:
@@ -360,11 +427,18 @@ btnG.add(rbtnTra);
 
     private void btnEnregistreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistreActionPerformed
         // TODO add your handling code here:
+        Archive.ecriture("c:/temp/listeFraisRepresentants.txt", registreFrais);
+        JOptionPane.showMessageDialog(null, "Vos données ont été enregistrées", "Merci", JOptionPane.INFORMATION_MESSAGE);
+        reset();
     }//GEN-LAST:event_btnEnregistreActionPerformed
 
     private void rbtnTrans2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTrans2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnTrans2ActionPerformed
+
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,6 +480,8 @@ btnG.add(rbtnTra);
                 new FenSaisie().setVisible(true);
             }
         });
+
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -432,7 +508,6 @@ btnG.add(rbtnTra);
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblLimite;
     private javax.swing.JLabel lblMont;
@@ -444,8 +519,9 @@ btnG.add(rbtnTra);
     private javax.swing.JRadioButton rbtnRepas2;
     private javax.swing.JRadioButton rbtnTra;
     private javax.swing.JRadioButton rbtnTrans2;
+    private javax.swing.JTable tblAffichage;
     private javax.swing.JComboBox<String> trans;
-    private javax.swing.JTextField txtDate;
+    private javax.swing.JFormattedTextField txtDate;
     private javax.swing.JTextField txtMont;
     private javax.swing.JTextField txtRep;
     // End of variables declaration//GEN-END:variables

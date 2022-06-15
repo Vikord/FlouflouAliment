@@ -17,11 +17,6 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FenSaisie().setVisible(true);
-            }
-        });
 
         HashMap<String, CategorieEmploye> categories = new HashMap<>();
 
@@ -35,35 +30,11 @@ public class Main {
 
         ListeRepresentants listeRepresentants = new ListeRepresentants();
 
-        try {
-            listeRepresentants = Archive.lecture("c:/temp/representants.json", categories); //gérer exceptions
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        } catch (IOException e2) {
-            e2.printStackTrace();
-        } catch (ParseException e3) {
-            e3.printStackTrace();
-        }
-
-
-        String empId = "7";
-        double testMontant = 200;
-        String date = "2022-06-10";
-
-        Employe testEmploye = listeRepresentants.rechercherEmployeParId(empId);
-        System.out.println(testEmploye);
-
-        Frais testFrais = new FraisRepas();
-        double montantRemboursement = testFrais.calculerRemboursementFrais(testEmploye, testMontant);
-        System.out.println(montantRemboursement);
-
-        RegistreFrais testRegistreFrais = new RegistreFrais();
-        testRegistreFrais.ajouterFrais(new FraisRepas(testEmploye, "repas", testMontant, date, montantRemboursement));
-
-
-
-        //Ecriture
-        Archive.ecriture("c:/temp/listeFraisRepresentants.txt", testRegistreFrais);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FenSaisie(listeRepresentants, categories).setVisible(true);
+            }
+        });
 
     }
 }
