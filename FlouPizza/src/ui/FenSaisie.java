@@ -377,14 +377,24 @@ public class FenSaisie extends javax.swing.JFrame {
         else if(rbtnTrans2.isSelected())
             frais = new FraisDeplacement();
 
-        double montantRemboursement = frais.calculerRemboursementFrais(employe, montantFrais);
+        boolean aerien = false;
+        if(trans.getSelectedItem().equals("avion"))
+            aerien = true;
+
+        double montantRemboursement = frais.calculerRemboursementFrais(employe, montantFrais, aerien);
 
         if(rbtnRepas2.isSelected())
             registreFrais.ajouterFrais(new FraisRepas(employe, "Repas", montantFrais, txtDate.getText(), montantRemboursement));
         else if(rbtnHeber2.isSelected())
             registreFrais.ajouterFrais(new FraisHebergement(employe, "Hébergement", montantFrais, txtDate.getText(), montantRemboursement));
-        //else if(rbtnTrans2.isSelected())
-            //registreFrais.ajouterFrais(new FraisDeplacement(employe, "Déplacement", montantFrais, txtDate.getText(), montantRemboursement));
+        else if(rbtnTrans2.isSelected()) {
+            String typeDeplacement;
+            if(aerien)
+                typeDeplacement = "avion";
+            else
+                typeDeplacement = "voiture ou train";
+            registreFrais.ajouterFrais(new FraisDeplacement(employe, "Déplacement", montantFrais, txtDate.getText(), montantRemboursement, "voiture ou train"));
+        }
 
         registreFrais.listerFraisPourUI(tblAffichage);
 

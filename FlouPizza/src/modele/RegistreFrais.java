@@ -32,9 +32,9 @@ public class RegistreFrais {
         }
     }
 
-    private boolean validerDoublon(Frais depense) {
+    private boolean validerDoublon(Frais frais) {
         for (Frais tmp: registreFrais) {
-            if(tmp.equals(depense)) {
+            if(tmp.equals(frais)) {
                 return true;
             }
         }
@@ -56,6 +56,8 @@ public class RegistreFrais {
             + tmp.getCategorieFrais() + " "
             + tmp.getMontantFrais() + "$ → "
             + tmp.getMontantRemboursementFrais() + "$");
+            if(tmp instanceof FraisDeplacement)
+                sb.append(((FraisDeplacement) tmp).getTypeDeplacement());
             sb.append("\n");
         }
         return sb.toString();

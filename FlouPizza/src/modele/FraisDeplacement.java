@@ -13,8 +13,19 @@ public class FraisDeplacement extends Frais {
         this.typeDeplacement = typeDeplacement;
     }
 
+    public String getTypeDeplacement() {
+        return typeDeplacement;
+    }
+
+    public void setTypeDeplacement(String typeDeplacement) {
+        this.typeDeplacement = typeDeplacement;
+    }
+
     @Override
-    public double retournerAllocation(Employe employe) {
-        return employe.getCategorieEmploye().getMontantAlloueDeplacementTerrestre();
+    public double retournerAllocation(Employe employe, boolean avion) {
+        if(avion)
+            return employe.getCategorieEmploye().getGetMontantAlloueDeplacementAerien();
+        else
+            return employe.getCategorieEmploye().getMontantAlloueDeplacementTerrestre();
     }
 }

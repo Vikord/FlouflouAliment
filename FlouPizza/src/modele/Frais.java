@@ -63,8 +63,8 @@ public abstract class Frais {
         this.montantRemboursementFrais = montantRemboursementFrais;
     }
 
-    public double calculerRemboursementFrais(Employe employe, double montantFrais) {
-        double allocation = retournerAllocation(employe);
+    public double calculerRemboursementFrais(Employe employe, double montantFrais, boolean avion) {
+        double allocation = retournerAllocation(employe, avion);
 
         if (montantFrais > allocation)
             return allocation;
@@ -73,7 +73,7 @@ public abstract class Frais {
         }
     }
 
-    public double retournerAllocation(Employe employe) {
+    public double retournerAllocation(Employe employe, boolean avion) {
         return 0;
     }
 

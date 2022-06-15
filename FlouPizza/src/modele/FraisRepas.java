@@ -12,7 +12,7 @@ public class FraisRepas extends Frais {
     }
 
     @Override
-    public double retournerAllocation(Employe employe) {
+    public double retournerAllocation(Employe employe, boolean avion) {
         return employe.getCategorieEmploye().getMontantAlloueRepas();
     }
 }
