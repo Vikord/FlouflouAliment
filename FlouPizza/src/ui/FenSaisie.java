@@ -287,6 +287,7 @@ public class FenSaisie extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+
         tblAffichage.setEnabled(false);
         tblAffichage.setFocusable(false);
         tblAffichage.setRowSelectionAllowed(false);
